@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Video</title>
+    <title>Upload Video or Image</title>
     <style>
         body{
             color:white;
@@ -62,40 +62,43 @@
     </style>
 </head>
 <body>
-    <header class="feature-box top">
-        <h1><strong>Object Detection using YOLOv8</strong></h1>
-    </header>
+<header class="feature-box top">
+    <h1><strong>Object Detection using YOLOv8</strong></h1>
+</header>
+<header class="feature-box second">
+    <h1><strong>Output Video</strong></h1>
+</header>
 
-    <header class="feature-box second">
-        <h1><strong>Output Video or Image</strong></h1>
-    </header>
+<!--	<section class="col-sm">-->
+<!--		<img src="{{ url_for('video') }}"   alt="Upload video">-->
+<!--	</section>-->
 
     <section class="col-sm">
-        {% if session.get('video_path') %}
-            <!-- Display uploaded video -->
-            <video class="features" controls>
-                <source src="{{ url_for('video') }}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        {% elif session.get('image_path') %}
-            <!-- Display uploaded image -->
-            <img src="{{ url_for('image') }}" alt="Uploaded Image">
-        {% endif %}
+    {% if session.get('video_path') %}
+        <!-- Display uploaded video -->
+        <img src="{{ url_for('video') }}"   alt="Upload video">
+    {% elif session.get('image_path') %}
+        <!-- Display uploaded image -->
+        <img src="{{ url_for('image') }}" alt="Uploaded Image">
+    {% endif %}
     </section>
 
-    <section>
-        <div class="new">
-            <!-- Form for uploading files -->
-            <form method='POST' enctype="multipart/form-data" style="align-content: center; text-align: center; display: flex;">
-                {{ form.hidden_tag() }}
-                {{ form.file(class_="custom-file-input") }}
-                <div>
-                    <button type="submit" name="favorite" value="x" class="btnCustom">
-                        Submit
-                    </button>
-                </div>
-            </form>
-        </div>
-    </section>
+
+<section>
+    <div class="new">
+        <!-- Form for uploading files -->
+        <form method='POST' enctype="multipart/form-data" style="align-content: center; text-align: center; display: flex;">
+            {{ form.hidden_tag() }}
+            {{ form.file(class_="custom-file-input") }}
+
+            <div>
+                <button type="submit" name="favorite" value="x" class="btnCustom">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
 </body>
 </html>

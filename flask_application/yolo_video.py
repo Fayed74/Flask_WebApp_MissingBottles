@@ -30,6 +30,7 @@ def video_detection(path_x):
 
     while True:
         ret, frame = cap.read()
+        print(f"vid frame: {frame}")
 
         if not ret:
             break

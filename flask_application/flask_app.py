@@ -51,6 +51,14 @@ def generate_frames_web(path_x):
         yield (b'--frame\r\n'
                     b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
+def generate_image_web(path_x):
+    yolo_output = image_detection(path_x)
+    for detection_ in yolo_output:
+        ref, buffer = cv2.imencode('.jpg', detection_)
+        frame = buffer.tobytes()
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/home', methods=['GET', 'POST'])
 def home():
@@ -64,23 +72,62 @@ def home():
 def webcam():
     session.clear()
     return render_template('ui.html')
+
+# @app.route("/FrontPage", methods=['GET', 'POST'])
+# def front():
+#     # Upload File Form: Create an instance for the Upload File Form
+#     form = UploadFileForm()
+#     if form.validate_on_submit():
+#         # our uploaded video file path is saved here
+#         file = form.file.data
+#         file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)), app.config['UPLOAD_FOLDER'],
+#                                secure_filename(file.filename))) # Then save the file
+#         # Use session storage to save video file path and confidence value
+#         session['video_path'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), app.config['UPLOAD_FOLDER'],
+#                                              secure_filename(file.filename))
+#     return render_template('videoprojectnew.html', form=form)
+
+#UPLOAD_FOLDER = 'uploads'  # Directory where uploaded files will be stored
+
 @app.route("/FrontPage", methods=['GET', 'POST'])
 def front():
-    # Upload File Form: Create an instance for the Upload File Form
     form = UploadFileForm()
     if form.validate_on_submit():
-        # our uploaded video file path is saved here
         file = form.file.data
         file.save(os.path.join(os.path.abspath(os.path.dirname(__file__)), app.config['UPLOAD_FOLDER'],
-                               secure_filename(file.filename))) # Then save the file
-        # Use session storage to save video file path and confidence value
-        session['video_path'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), app.config['UPLOAD_FOLDER'],
-                                             secure_filename(file.filename))
-    return render_template('videoprojectnew.html', form=form)
+                                        secure_filename(file.filename))) # Then save the file
+        if file:
+            if is_video(file.filename):
+                # Process uploaded video
+                # Save video path in session
+                session['video_path'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), app.config['UPLOAD_FOLDER'],
+                                                     secure_filename(file.filename))
+            elif is_image(file.filename):
+                # Process uploaded image
+                # Save image path in session
+                session['image_path'] = os.path.join(os.path.abspath(os.path.dirname(__file__)), app.config['UPLOAD_FOLDER'],
+                                                     secure_filename(file.filename))
+
+    return render_template('video-image.html', form=form)
+
+
+# Helper functions to check file types
+def is_video(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'mp4', 'avi', 'mkv'}  # Add more video formats if needed
+
+def is_image(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in {'png', 'jpg', 'jpeg', 'gif'}  # Add more image formats if needed
+
 
 @app.route('/webapp')
 def webapp():
     return Response(generate_frames(path_x=0), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+
+@app.route('/image')
+def image():
+    return Response(generate_image_web(path_x=session.get('image_path', None)), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 @app.route('/video')
 def video():
