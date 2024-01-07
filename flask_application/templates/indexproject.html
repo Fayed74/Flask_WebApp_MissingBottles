@@ -2,175 +2,119 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ObjectDetection-YOLOv8</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Detection System</title>
     <style>
-        body{
-        font-family:Helvetica, sans-serif;
-        margin:0px;
-        padding:0px;
-        }
-        header.feature-box.right{
-        background-color:black;
-        color:white;
-        height:120px;
-        padding:5px;
-        text-align:right;
-        }
-        header.feature-box.below{
-        height:800px;
-        background-color:blue;
-        margin-top:-30px;
-        background-image:url("static/images/1.png");
-        background-size:100%;
-        background-position:center;
-        }
-        ul{
-        list-style:none;
-        padding:0px;}
-        li{
-        display:inline-block;
-        background-color:gray;
-        border-radius:10px;
-        padding:10px;
-        margin:10px;
-        }
-        li:hover{
-        background-color:red;
-        margin:10px;
-        }
-        header a{
-        color:white;
-        text-decoration:none;
-        width:100%;
-        }
-        .details{
-        height:80px;
-        margin:40px;
-        padding:0px;
-        font-size:40px;
-        background-color:gray;
-        text-align:center;
-        color:black;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            background-image: url("static/images/11.jpg"); /* Adding the background image */
+            background-size: cover; /* Ensure the background image covers the entire screen */
         }
 
-
-        .features{
-        background:white;
-        color:gray;
-        display:flex;
-        flex-direction:row;
-        padding:20px;
-
-        }
-        .features figure
-        {/*background:pink;*/
-        width:400px;
-        margin:auto;
-        text-align:center;
-        text-transform:uppercase;
-        }
-        .features figure img{
-        border-radius:10%;
-        width:400px;
-        }
-        div.main{
-        display:flex;
-        margin:40px;
-        letter-spacing:1px;
-        h1, h2, h3, h4, h5, h6 {
-          font-family: "Playfair Display";
-    letter-spacing: 5px;
-        }
-        }
-        .subpart2{
-        text-align:center;
-        text-transform:uppercase;
-        }
-        .subpart2 figure img{
-        border-radius:4%;
-        width:800px;
-        }
-        .contactpage{
-        margin:20px;
-        }
-        #textbox {
-       font-size: 18pt;
-        height: 42px;
-        width : 1000px;
-        }
-        #textboxes {
-       font-size: 18pt;
-        height: 42px;
-        width : 1000px;
-        }
-        footer{
-        background-color:black;
-        text-align:center;
-        margin:0px;
-        padding:0px;
-        color:white;
-        font-size:20px;
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
         }
 
+        header ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        header ul li {
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        header ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .details {
+            height: 80px;
+            margin: 40px;
+            padding: 0;
+            font-size: 40px;
+            background-color: gray;
+            text-align: center;
+            color: black;
+        }
+
+        .intro {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px;
+            line-height: 1.6;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        button.btnCustom {
+            padding: 10px 20px;
+            background-color: #6b320c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        button.btnCustom:hover {
+            background-color: #555;
+        }
     </style>
 </head>
 <body>
-    <header class="feature-box right">
-        <nav>
-            <ul>
-            <li><a href="/home">Home</a></li>
-            <li><a href="/FrontPage">Video-image</a></li>
-            <li><a href="/webcam">LiveWebcam</a></li>
-            </ul>
-        </nav>
-    </header>
+    <header>
+    <h1 class="title">Automated Detection of Missing Items/Bottles in Packages</h1>
+    <nav>
+        <ul>
+            <li><button onclick="goTo('/home')" class="btnCustom">Home</button></li>
+            <li><button onclick="goTo('/FrontPage')" class="btnCustom">Video-image</button></li>
+            <li><button onclick="goTo('/webcam')" class="btnCustom">LiveWebcam</button></li>
+        </ul>
+    </nav>
+</header>
 
-    <header class="feature-box below">
-    </header>
-
+<script>
+    function goTo(url) {
+        window.location.href = url;
+    }
+</script>
 
     <section class="details">
-        <h1>Sample Results</h1>
-
+        <h1>Checking number of missing items</h1>
     </section>
-    <section class="features">
-        <figure>
-            <img src="../static/images/1.png" alt="YOLOv8 Results 1">
-            <figcaption>YOLOv8 Results 1</figcaption>
-        </figure>
-        <figure>
-            <img src="static/images/2.png" alt="YOLOv8 Results 2">
-            <figcaption>YOLOv8 Results 2</figcaption>
-        </figure>
-        <figure>
-            <img src="static/images/3.png" alt="YOLOv8 Results 3">
-            <figcaption>YOLOv8 Results 3</figcaption>
-    </figure>
-    </section>
-    <div class="main">
-        <div class="subpart1">
-            <h1>Object Detection using YOLOv8</h1><br>
-            <h4> FPS of Video</h4>
-            <p>FPS represents the Frame Rate, in case of GPU the FPS will be high while in case of CPU the FPS will be low</p><br>
-            <h4>Shape of Current Frame</h4>
-            <p>The shape of current frame i.e. Resolution will be calculated</p><br>
-            <h4>Detections in Current Frame</h4>
-            <p>Total detections in each of the frame will be calculated</p><br>
 
+    <main>
+        <section class="intro">
+            <<p style="color: #4CAF50; font-size: 23px; line-height: 1.6;">Welcome to our cutting-edge detection system designed to safeguard your packages. Our advanced technology uses state-of-the-art computer vision to ensure every item is accounted for. Seamlessly integrated into your workflow, it guarantees precision and reliability, minimizing the risk of missing items. Experience enhanced efficiency and customer satisfaction as we redefine package verification standards, ensuring flawless identifications every time!</p>
+
+        </section>
+    </main>
+
+    <footer>
+        <div class="contact-info">
+            <h3>Contact</h3>
+            <p>Email: abdelrahmanfayed2000@gmail.com</p>
         </div>
-
-      <div class="subpart2"><figure>
-      <img src="static/images/1.png"  alt="Image Missing">
-          <figcaption>Sample Results</figcaption>
-        </figure>
-      </div>
-  </div>
-
-<footer>
-    <p>Web APP for my FYP2 to have a user-friendly interface</p>
-</footer>
+    </footer>
 </body>
 </html>

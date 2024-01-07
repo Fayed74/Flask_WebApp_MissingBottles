@@ -1,77 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        function goBack() {
+            window.location.href = "/home"; // Replace "/home" with the actual URL
+        }
+    </script>
+
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Video</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam</title>
     <style>
-        body{
-            color:white;
-            margin:0px;
-            padding:0px;
-        }
-        header.feature-box.top{
-        background-color:black;
-        height:100px;
-        margin:0px;
-        padding:20px;
-        text-align:center;
-        }
-        header.feature-box.second{
-        background-color:blue;
-        height:50px;
-        text-align:center;
-        margin-top:-25px;
-        }
-        .features{
-          background-color:black;
-          width: 900px;
-          height: 700px;
-          border-radius: 35px;
-          object-fit: contain;
-          margin:20px;
-        }
-        section.col-sm{
-          background-color:black;
-          width: 1000px;
-          height: 650px;
-          border-radius: 35px;
-          object-fit: contain;
-          margin:40px;
+        body {
+            color: white;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('static/images/44.jpg'); /* Replace 'your_background_image.jpg' with your image path */
+            background-size: cover;
+            background-position: center;
         }
 
-        img{
-          width: 900px;
-          height: 600px;
-          border-radius: 35px;
-          object-fit: contain;
-          margin:40px;
+        header {
+            text-align: center;
+            padding: 20px;
+            margin: 0;
         }
 
-        .new{
-        color:black;
-        margin:0px;
-        padding:10px;
-        background-color:green;
-        margin:0px;
-        margin-top:-10px;
+        .top {
+            background-color: rgba(0, 0, 0, 0.5); /* Adding transparency to the background */
+            height: 100px;
+        }
+
+        .second {
+            background-color: rgba(0, 0, 255, 0.5); /* Adding transparency to the background */
+            height: 50px;
+            margin-top: -25px;
+        }
+
+        .col-sm {
+            background-color: rgba(0, 0, 0, 0.5); /* Adding transparency to the background */
+            width: 1000px;
+            height: 800px; /* Increased height for the video display */
+            border-radius: 35px;
+            margin: 40px auto;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 35px;
+            object-fit: cover;
+        }
+
+        .new {
+            color: black;
+            margin: 0;
+            padding: 10px;
+            background-color: green;
+            margin: 0;
+            margin-top: -10px;
+        }
+
+        .back-button {
+            display: block;
+            width: 120px;
+            padding: 10px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back-button:hover {
+            background-color: #555;
+        }
+
+        button.btnCustom {
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        button.btnCustom:hover {
+            background-color: #555;
         }
     </style>
 </head>
 <body>
-<header class="feature-box top">
-    <h1><strong>Object Detection using YOLOv8</strong></h1>
-</header>
-<header class="feature-box second">
-     <h1><strong>Output Video of Webcam</strong></h1>
-</header>
+    <header class="feature-box top">
+        <h1><strong>Package items pre-check</strong></h1>
+    </header>
+    <header class="feature-box second">
+        <h1><strong>Missing bottles checking ...</strong></h1>
+    </header>
 
-  <section class="col-sm " >
-          <img src="{{ url_for('webapp') }}"   alt="Upload video">
+    <section class="col-sm">
+        <img src="{{ url_for('webapp') }}" alt="Upload video">
+    </section>
 
-  </section>
-
+    <div style="text-align: center; margin-top: 20px;">
+            <button onclick="goBack()" class="btnCustom">Go to Home Page</button>
+    </div>
 </body>
 </html>
